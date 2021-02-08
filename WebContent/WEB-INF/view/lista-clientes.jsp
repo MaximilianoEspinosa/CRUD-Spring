@@ -7,7 +7,8 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title> Lista clientes </title>
+		<title> Lista clientes </title>		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/estilos.css">		
 	</head>
 	
 	<body>
@@ -16,7 +17,7 @@
 		
 		<hr>
 		
-		<table>		
+		<table>
 			<tr>
 				<th> ID </th>
 				<th> Nombre </th>
@@ -35,8 +36,5 @@
 			</c:forEach>
 		
 		</table>
-		
-		
-
 	</body>
 </html>
