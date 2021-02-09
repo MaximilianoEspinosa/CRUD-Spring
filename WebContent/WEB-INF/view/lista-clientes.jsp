@@ -8,16 +8,16 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title> Lista clientes </title>		
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/estilos.css">		
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/estilos.css">
 	</head>
 	
 	<body>
 
-		<p> Hemos llegado a la lista de futuros clientes!!! </p>
+		<h1> Lista de clientes!!! </h1>
 		
 		<hr>
 		
-		<table>
+		<table border="1">
 			<tr>
 				<th> ID </th>
 				<th> Nombre </th>
@@ -34,7 +34,11 @@
 					<td> ${c.email} </td>
 				</tr>
 			</c:forEach>
-		
 		</table>
+		
+		<br>
+		
+		<input type="button" value="Registrar cliente" onclick="window.location.href='formulario_registro'; return false;"/>
+		
 	</body>
 </html>
