@@ -12,11 +12,14 @@
 	</head>
 
 	<body>
-		<h1> Registro nuevo cliente!!! </h1>
+		<h1> Registro/modificación cliente!!! </h1>
 		
 		<hr>
 		
 		<form:form action="registrar_cliente" modelAttribute="nuevo_cliente" method="POST">
+		
+			<form:hidden path="id" />
+		
 			<table>
 			
 				<tr>

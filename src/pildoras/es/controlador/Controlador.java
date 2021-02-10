@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pildoras.es.controlador.entity.Cliente;
 import pildoras.es.dao.ClienteDAO;
@@ -52,4 +54,21 @@ public class Controlador {
 		
 		return "redirect:/cliente/lista";
 	}
+	
+	@GetMapping("/actualizar")
+	public String actualizarCliente(@RequestParam("id_cliente") int id, Model modelo) {
+		
+		//Obtener cliente
+		
+		Cliente cliente = clienteDAO.getCliente(id);
+		
+		//Establecer el cliente como atributo del modelo
+		
+		modelo.addAttribute("nuevo_cliente", cliente);
+		
+		//Enviar al formulario
+		
+		return "formulario-cliente";
+	}
+	
 }

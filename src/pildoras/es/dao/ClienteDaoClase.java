@@ -40,8 +40,22 @@ public class ClienteDaoClase implements ClienteDAO {
 		//Obtener la session		
 		Session sesion = sessionFactory.getCurrentSession();
 		
-		//Registra el cliente
-		sesion.save(cliente);
+		//Registra el cliente o modifica el cliente si ya existe
+		//sesion.save(cliente);
+		sesion.saveOrUpdate(cliente);
 		
+	}
+
+	@Override
+	@Transactional
+	public Cliente getCliente(int id) {
+
+		//Obtener la sesión
+		Session sesion = sessionFactory.getCurrentSession();
+		
+		//Obtener la info del cliente
+		Cliente cliente = sesion.get(Cliente.class, id);
+		
+		return cliente;
 	}
 }

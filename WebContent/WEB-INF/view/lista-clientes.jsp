@@ -23,15 +23,27 @@
 				<th> Nombre </th>
 				<th> Apellidos </th>
 				<th> Email </th>
+				
+				<th> Modificar </th>
 			</tr>
 			
 			<!-- Para acceder a los atributos de cada objeto, deben poseer sus respectivos getters -->
 			<c:forEach var="c" items="${clientes }">
+				<c:url var="modificar_cliente" value="/cliente/actualizar">
+					<c:param name="id_cliente" value="${c.id}"/>
+				</c:url>
+				
 				<tr>
 					<td> ${c.id} </td>
 					<td> ${c.nombre} </td>
 					<td> ${c.apellidos} </td>
 					<td> ${c.email} </td>
+					
+					<td>
+						<a href="${modificar_cliente}">
+							<input type="button" value="Modificar"/>
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

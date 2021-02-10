@@ -7,5 +7,8 @@ public interface ClienteDAO {
 
 	public List<Cliente> getClientes();
 
-	public void registrarCliente(Cliente cliente);	
+	public void registrarCliente(Cliente cliente);
+
+	public Cliente getCliente(int id);
+	
 }
