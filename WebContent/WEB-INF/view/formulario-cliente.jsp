@@ -46,6 +46,13 @@
 			</table>
 		</form:form>
 		
+		<hr>
+		
+		<form:form action="eliminar_cliente" modelAttribute="nuevo_cliente" method="POST">
+			<form:hidden path="id" />
+			<input type="submit" value="Eliminar">
+		</form:form>
+		
 		
 	</body>
 </html>

@@ -71,4 +71,14 @@ public class Controlador {
 		return "formulario-cliente";
 	}
 	
+	@PostMapping("/eliminar_cliente")
+	public String eliminarCliente(@ModelAttribute("nuevo_cliente") Cliente cliente) {
+		
+		//Eliminar cliente
+		clienteDAO.eliminarCliente(cliente);
+		
+		//Redirigir
+		return "redirect:/cliente/lista";
+	}
+	
 }

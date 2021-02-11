@@ -58,4 +58,14 @@ public class ClienteDaoClase implements ClienteDAO {
 		
 		return cliente;
 	}
+	
+	@Override
+	@Transactional
+	public void eliminarCliente(Cliente cliente) {
+		//Obtener la sesión
+		Session sesion = sessionFactory.getCurrentSession();
+		
+		//eliminar la info del cliente
+		sesion.delete(cliente);
+	}
 }
