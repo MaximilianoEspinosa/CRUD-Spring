@@ -1,5 +1,6 @@
 package pildoras.es.dao;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pildoras.es.controlador.entity.Cliente;
+import pildoras.es.controlador.entity.Pedido;
 
 @Repository
 public class ClienteDaoClase implements ClienteDAO {
@@ -67,5 +69,23 @@ public class ClienteDaoClase implements ClienteDAO {
 		
 		//eliminar la info del cliente
 		sesion.delete(cliente);
+	}
+
+	@Override
+	@Transactional
+	public void agregarPedido(Pedido nuevo_pedido) {
+		
+		//Obtener la sesión
+		Session sesion = sessionFactory.getCurrentSession();		
+		
+		//Se ingresa fecha a nuevo pedido
+		nuevo_pedido.setFecha(new GregorianCalendar(2021, 2, 18));
+		
+		//Se asocia pedido al cliente
+		Cliente cliente = nuevo_pedido.getCliente();
+		cliente.agregarPedido(nuevo_pedido);
+		
+		//Se guarda pedido en BD
+		sesion.save(nuevo_pedido);
 	}
 }

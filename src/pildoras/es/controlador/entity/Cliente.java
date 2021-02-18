@@ -1,11 +1,15 @@
 package pildoras.es.controlador.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "clientes")
 public class Cliente {
 	
+	//Atributos
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -19,11 +23,26 @@ public class Cliente {
 	
 	@Column(name="email")
 	private String email;
+	
+	//Posee un único objeto de detalle
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private DetalleCliente detalle;
+	
+	//Posee múltiples pedidos
+	//Indica que tiene muchos de una clase y "cliente" indica el atributo que usa la clase Pedido
+	//FetchType.EAGER indica que cargará información inmediatamente a menos que en un futuro se solicite
+	//En relaciones uno a varios o varios a varios, es LAZY por defecto
+	@OneToMany(mappedBy = "cliente", 
+				cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH},
+				fetch = FetchType.EAGER
+	)
+	private List<Pedido> pedidos;
+	
+	//Constructor
+	public Cliente() {}
 
-	public Cliente() {
-		
-	}
-
+	//Getters and setters
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + "]";
@@ -59,5 +78,26 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public DetalleCliente getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(DetalleCliente detalle) {
+		this.detalle = detalle;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void agregarPedido(Pedido pedido) {
+		
+		if(pedidos == null) {
+			pedidos = new ArrayList<>();
+		}
+		
+		pedidos.add(pedido);
 	}
 }

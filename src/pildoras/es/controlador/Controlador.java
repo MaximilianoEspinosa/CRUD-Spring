@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pildoras.es.controlador.entity.Cliente;
+import pildoras.es.controlador.entity.Pedido;
 import pildoras.es.dao.ClienteDAO;
 
 @Controller
@@ -81,4 +83,43 @@ public class Controlador {
 		return "redirect:/cliente/lista";
 	}
 	
+	@GetMapping("/pedidos")
+	public String verPedidos(@RequestParam("id_cliente") int id, Model modelo) {
+		
+		//Obtener cliente
+		Cliente cliente = clienteDAO.getCliente(id);
+		
+		//Establecer los pedidos y el cliente como atributo del modelo
+		modelo.addAttribute("pedidos", cliente.getPedidos());
+		modelo.addAttribute("cliente", cliente);
+		
+		//Enviar al formulario
+		
+		return "pedidos-cliente";
+	}
+	
+	@GetMapping(value = "/formulario_nuevo_pedido/{id_cliente}")
+	public String verFormularioNuevoPedido(@PathVariable("id_cliente") int id_cliente, Model modelo) {
+		
+		//Obtener cliente
+		Cliente cliente = clienteDAO.getCliente(id_cliente);
+		Pedido nuevo_pedido = new Pedido();
+		//nuevo_pedido.setCliente(cliente);
+		
+		//Establecer el cliente como atributo del modelo				
+		modelo.addAttribute("cliente", cliente);
+		modelo.addAttribute("nuevo_pedido", nuevo_pedido);
+		
+		return "formulario-pedido";
+	}
+	
+	@PostMapping("/formulario_nuevo_pedido/registrar_pedido")
+	public String registrarPedido(@ModelAttribute("nuevo_pedido") Pedido nuevo_pedido) {
+				
+		System.out.println(nuevo_pedido.toString());
+		
+		clienteDAO.agregarPedido(nuevo_pedido);
+		
+		return "redirect:/cliente/lista";
+	}
 }

@@ -38,6 +38,21 @@
 				</tr>
 				
 				<tr>
+					<td> Web: </td>
+					<td> <form:input path="detalle.web"/></td>				
+				</tr>
+				
+				<tr>
+					<td> Teléfono: </td>
+					<td> <form:input path="detalle.telefono"/></td>				
+				</tr>
+				
+				<tr>
+					<td> Comentarios: </td>
+					<td> <form:input path="detalle.comentarios"/></td>				
+				</tr>
+				
+				<tr>
 					<td colspan	="2"> 
 						<input type="submit" value="Registrar"> 
 					</td>
