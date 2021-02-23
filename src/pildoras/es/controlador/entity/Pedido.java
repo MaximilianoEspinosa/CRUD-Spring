@@ -1,6 +1,7 @@
 package pildoras.es.controlador.entity;
 
-import java.util.GregorianCalendar;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -12,8 +13,9 @@ public class Pedido {
 	@Column(name="id", updatable=false)
 	private int id;
 	
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	@Column(name="fecha")
-	private GregorianCalendar fecha;
+	private Date fecha;
 	
 	@Column(name="forma_pago")
 	private String formaPago;
@@ -26,11 +28,14 @@ public class Pedido {
 
 	public Pedido() {}
 	
-	public Pedido(GregorianCalendar gregorianCalendar) {
-		this.fecha = gregorianCalendar;
-		this.formaPago = "Sin indicar";
+	public int getId() {
+		return id;
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getFormaPago() {
 		return formaPago;
 	}
@@ -47,16 +52,16 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public GregorianCalendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", fecha=" + fecha + ", formaPago=" + formaPago + "]";
+		return "Pedido [id=" + id + ", formaPago=" + formaPago + "] \n" + getCliente().toString();
 	}
 }

@@ -16,9 +16,25 @@
 		
 		<hr>
 		
-		<p> (Listando...) </p>
+		<table border="1">
+			<tr>
+				<th> ID </th>
+				<th> Fecha </th>
+				<th> Forma de Pago </th>
+			</tr>
+			
+			<!-- Para acceder a los atributos de cada objeto, deben poseer sus respectivos getters -->
+			<c:forEach var="p" items="${cliente.pedidos}">				
+				
+				<tr>
+					<td> ${p.id} </td>
+					<td> ${p.fecha} </td>
+					<td> ${p.formaPago} </td>
+				</tr>
+			</c:forEach>
+		</table>
 		
-		<hr>
+		<br>
 		
 		<input type="button" value="Nuevo pedido" onclick="window.location.href='formulario_nuevo_pedido/'+${cliente.id}; return false;"/>
 	</body>

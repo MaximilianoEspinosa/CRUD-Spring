@@ -103,22 +103,26 @@ public class Controlador {
 		
 		//Obtener cliente
 		Cliente cliente = clienteDAO.getCliente(id_cliente);
-		Pedido nuevo_pedido = new Pedido();
-		//nuevo_pedido.setCliente(cliente);
 		
-		//Establecer el cliente como atributo del modelo				
+		//Crear pedido
+		Pedido pedido = new Pedido();
+		
+		//Pasar datos a vista para ingresar datos
+		modelo.addAttribute("pedido", pedido);
 		modelo.addAttribute("cliente", cliente);
-		modelo.addAttribute("nuevo_pedido", nuevo_pedido);
 		
 		return "formulario-pedido";
 	}
 	
-	@PostMapping("/formulario_nuevo_pedido/registrar_pedido")
-	public String registrarPedido(@ModelAttribute("nuevo_pedido") Pedido nuevo_pedido) {
-				
-		System.out.println(nuevo_pedido.toString());
+	@PostMapping("/formulario_nuevo_pedido/registrar_pedido/{id_cliente}")
+	public String registrarPedido(@ModelAttribute("pedido") Pedido pedido, @PathVariable("id_cliente") int id_cliente) {
 		
-		clienteDAO.agregarPedido(nuevo_pedido);
+		//Obtener cliente
+		Cliente cliente = clienteDAO.getCliente(id_cliente);
+		pedido.setCliente(cliente);
+		
+		clienteDAO.guardarPedido(pedido);
+		pedido.toString();
 		
 		return "redirect:/cliente/lista";
 	}

@@ -14,6 +14,6 @@ public interface ClienteDAO {
 	
 	public void eliminarCliente(Cliente cliente);
 
-	public void agregarPedido(Pedido pedido);
+	void guardarPedido(Pedido pedido);
 	
 }

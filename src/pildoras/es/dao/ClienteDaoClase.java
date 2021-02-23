@@ -1,6 +1,6 @@
 package pildoras.es.dao;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -55,7 +55,7 @@ public class ClienteDaoClase implements ClienteDAO {
 		//Obtener la sesión
 		Session sesion = sessionFactory.getCurrentSession();
 		
-		//Obtener la info del cliente
+		//Obtener la info del clienteCl
 		Cliente cliente = sesion.get(Cliente.class, id);
 		
 		return cliente;
@@ -69,23 +69,18 @@ public class ClienteDaoClase implements ClienteDAO {
 		
 		//eliminar la info del cliente
 		sesion.delete(cliente);
-	}
+	}	
 
 	@Override
 	@Transactional
-	public void agregarPedido(Pedido nuevo_pedido) {
+	public void guardarPedido(Pedido pedido) {
 		
-		//Obtener la sesión
-		Session sesion = sessionFactory.getCurrentSession();		
+		//Obtener la session
+		Session sesion = sessionFactory.getCurrentSession();
 		
-		//Se ingresa fecha a nuevo pedido
-		nuevo_pedido.setFecha(new GregorianCalendar(2021, 2, 18));
+		pedido.setFecha(new Date());
 		
-		//Se asocia pedido al cliente
-		Cliente cliente = nuevo_pedido.getCliente();
-		cliente.agregarPedido(nuevo_pedido);
+		sesion.saveOrUpdate(pedido);
 		
-		//Se guarda pedido en BD
-		sesion.save(nuevo_pedido);
 	}
 }

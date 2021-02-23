@@ -18,12 +18,21 @@
 		
 		<hr>
 		
-		<form:form action="registrar_pedido" modelAttribute="nuevo_pedido" method="POST">
+		<form:form action=" registrar_pedido/${cliente.id} " modelAttribute="pedido" method="POST">
 			
-			<table>				
+			<form:hidden path="id" />
+			
+			<table>
 				<tr>
 					<td> Forma pago: </td>
 					<td> <form:input path="formaPago"/></td>				
+				</tr>
+				
+				<tr>
+					<td> Fecha: </td>
+					<td> 
+						<form:input type="date" path="fecha" cssClass="form-control" /> 
+					</td>				
 				</tr>
 				
 				<tr>
